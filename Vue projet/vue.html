@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1er projet vue.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="container-fluid">
+            <div class="row">
+
+                <p class="jumbotron"> Prénom : <input type="text" v-model="user" placeholder="écris ton Prénom ici!"> </p>
+            </div>
+            <h1 v-bind:class="affichage"> Bienvenue à toi
+                {{user}} ! </h1>
+            <h1 v-bind:class="affich"> Voici mes artistes fav' du moment</h1>
+            <h1 v-bind:class="affich"> Choisi ton ou tes fav'</h1>
+            <div class="row">
+                <fiche v-for="artiste in artistes" v-bind:nom="artiste" v-on:choix-fait="choisir" role="choix"></fiche>
+                
+            </div>
+
+         
+            <h3 v-if="choix.length>0"> Très bon choix ;)</h3>
+
+            <div class="row">
+                <fiche v-for="choix in choix" v-bind:nom="choix" role="recap"></fiche>
+            </div>
+
+            <p>Voici mon tout premier tuto en Vue.js. <br> 
+                Je me suis autoformée grâce au tuto de Bertrand BOURGY <a href="https://www.youtube.com/watch?v=D3oivlcoEvw&list=TLPQMjIwODIwMjBiw7kk_bNUIg&index=2">le tuto</a></p>
+        </div>
+
+        
+
+    </div>
+    <script>
+        Vue.component('fiche', {
+            template:  ` <div class="col-2"> 
+            <p class="jumbotron"> {{nom}} <br>
+            <button v-on:click="passer_choix(nom)" v-if="role == 'choix'">Je choisis</button>
+            </p>
+            </div>`,
+            props: ['nom', 'role'],
+            methods: {
+               passer_choix: function(artiste) {
+                   this.$emit('choix-fait', artiste)
+               }
+            }
+        })
+        var app = new Vue({
+            el: "#app",
+            data: {
+                user: "",
+                artistes: ["Joji", "Taylor Swift", "Franck Ocean", "Girl in red", "Clairo", "Fiji Blue", "Kllo", "ZHU", "Mome", "Cuco", "Lykke Li", "Fisher"],
+                choix: [],
+                affichage: "display-3",
+                affich: "display-4"
+            },
+            methods: {
+                choisir: function (artiste) {
+                    this.choix.push(artiste);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

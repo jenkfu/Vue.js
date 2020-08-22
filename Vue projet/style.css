@@ -1,0 +1,35 @@
+body {
+    background: rgb(238,174,202);
+    background-size: 400% 400%;
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    animation: gradient 10s ease infinite;
+}
+
+button {
+    background-color: #eeaeca;
+    font-size: .75rem;
+    border-radius: 15px;
+    padding: .25rem 1rem;
+    margin-top: 1rem;
+    border: none;
+    transition: ease .5s all;
+}
+button:hover {
+    background-color: #94bbe9;
+    cursor: pointer;
+    border: solid .5px black;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: #22c1c3;
+}
+
+h1, p {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1 {
+    margin: 2rem;
+    text-align: center;
+}
